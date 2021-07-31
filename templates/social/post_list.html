@@ -1,0 +1,33 @@
+{% extends 'landing/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Post List {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6 col-sm-12">
+                <h2 class="text-center">Add a new post !!!</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6 col-sm-12">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-dark mt-3">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% for post in posts %}
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-6 col-sm-12 border-bottom">
+                    <h4><strong>{{ post.author|title }} </strong><i>{{ post.created_on }}</i></h4>
+                    <p>{{ post.body|linebreaks }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
