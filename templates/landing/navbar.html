@@ -1,15 +1,23 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">Social Network</a>
+        <a class="navbar-brand"
+                {% if user.is_authenticated %}
+           href="{% url 'post-list' %}"
+                {% else %}
+           href="{% url 'index' %}"
+                {% endif %}
+        ><i class="fas fa-comment"></i> Social Network</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link active" aria-current="page" href="#">Home</a>#}
-{#                </li>#}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'account_logout' %}">Log Out</a>
+                    </li>
+                {% endif %}
             </ul>
             <form class="d-flex">
                 <div class="input-group">
@@ -18,6 +26,20 @@
                            aria-describedby="basic-addon1">
                 </div>
             </form>
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user" style="color: white"></i> {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            {% endif %}
         </div>
     </div>
 </nav>

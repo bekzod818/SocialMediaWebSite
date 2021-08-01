@@ -18,7 +18,7 @@
 </head>
 <body>
 {% block body %}
-
+    {% include 'landing/navbar.html' %}
     {% if messages %}
         <div class="row justify-content-center pt-3">
             <div class="col-md-6">
@@ -28,7 +28,6 @@
             </div>
         </div>
     {% endif %}
-    {% include 'landing/navbar.html' %}
     <div class="mt-5">
     <div class="container">
         {% block content %}

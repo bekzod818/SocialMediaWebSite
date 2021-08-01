@@ -1,13 +1,14 @@
 from django.shortcuts import render
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, DetailView
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 
 
 class PostListView(ListView, FormView):
     model = Post
     context_object_name = 'posts'
     template_name = 'social/post_list.html'
+    ordering = ['-created_on']
     form_class = PostForm
 
     def post(self, request, *args, **kwargs):
@@ -24,3 +25,9 @@ class PostListView(ListView, FormView):
             'form': form
         }
         return render(request, 'social/post_list.html', context)
+
+
+class PostDetailView(DetailView, FormView):
+    model = Post
+    template_name = 'social/post-detail.html'
+    form_class = CommentForm
