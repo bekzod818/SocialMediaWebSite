@@ -1,0 +1,25 @@
+{% extends 'landing/base.html' %}
+
+{% block title %} Post Delete {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-3 col-sm-6">
+                <a href="{% url 'post-detail' object.pk %}" class="btn btn-danger">Back to Post</a>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-5 col-sm-12">
+                <h3>Are You Sure?</h3>
+                <p>You are about to delete this post, this cannot be undone.</p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

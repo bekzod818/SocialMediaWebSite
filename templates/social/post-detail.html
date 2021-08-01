@@ -11,10 +11,23 @@
             </div>
         </div>
         <div class="row justify-content-center mt-3">
-            <div class="col-md-6 col-sm-12">
-                <h4><strong>{{ post.author|title }}</strong> - <i>{{ post.created_on|date:"d M Y H:i" }}</i></h4>
+            <div class="col-md-6 col-sm-12 border-bottom pb-3">
+                <h4>
+                    <strong>{{ post.author|title }}</strong> - <i>{{ post.created_on|date:"d M Y H:i" }}</i>
+                </h4>
                 <p>{{ post.body|linebreaks }}</p>
+                {% if request.user == post.author %}
+                    <a href="{% url 'post-edit' post.pk %}" class="btn btn-outline-success"><i
+                            class="far fa-edit"></i> Edit Post</a>
+                    <a href="{% url 'post-delete' post.pk %}" class="btn btn-outline-danger"><i
+                            class="fas fa-trash-alt"></i> Delete Post</a>
+                {% endif %}
             </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12">
+            <h5>Add a Comment</h5>
         </div>
     </div>
     <div class="row justify-content-center mt-3 mb-5">
@@ -28,4 +41,16 @@
             </form>
         </div>
     </div>
+    {% for comment in comments %}
+        <div class="row justify-content-center mt-3 mb-5">
+            <div class="col-md-5 col-sm-12 border-bottom pb-3">
+                <p><strong>{{ comment.author|title }}</strong> - <i>{{ comment.created_on|date:"d M Y H:i" }}</i></p>
+                <p>{{ comment.comment|linebreaks }}</p>
+                {% if request.user == comment.author %}
+                    <a href="{% url 'comment-delete' post.pk comment.pk %}" class="btn btn-warning"><i
+                            class="fas fa-trash-alt"></i> Comment</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
