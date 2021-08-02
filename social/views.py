@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import ListView, FormView, DetailView, UpdateView, DeleteView
-from .models import Post, Comment
+from django.views.generic import ListView, FormView, UpdateView, DeleteView
+from .models import Post, Comment, UserProfile
 from .forms import PostForm, CommentForm
 
 
@@ -99,3 +99,18 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author
+
+
+class ProfileView(View):
+    def get(self, request, pk, *args, **kwargs):
+        profile = UserProfile.objects.get(pk=pk)
+        user = profile.user
+        posts = Post.objects.filter(author=user).order_by('-created_on')
+
+        context = {
+            'user': user,
+            'profile': profile,
+            'posts': posts
+        }
+
+        return render(request, 'social/profile.html', context)
