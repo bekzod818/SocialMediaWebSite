@@ -42,6 +42,7 @@ class UserProfile(models.Model):
     location = models.CharField(max_length=100, blank=True, null=True)
     picture = models.ImageField(upload_to='profile_picture/%Y/%m/%d/', default='profile_picture/default.jpeg',
                                 blank=True)
+    followers = models.ManyToManyField(User, blank=True, related_name='followers')
 
     class Meta:
         verbose_name = 'Profile'

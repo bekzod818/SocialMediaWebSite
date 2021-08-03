@@ -23,10 +23,14 @@
         </div>
         {% for post in posts %}
             <div class="row justify-content-center mt-3">
-                <div class="col-md-6 col-sm-12 border-bottom position-relative">
-                    <h4><strong>{{ post.author|title }}</strong> - <i>{{ post.created_on|date:"d M Y H:i" }}</i></h4>
-                    <p>{{ post.body|linebreaks }}</p>
-                    <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+                <div class="col-md-6 col-sm-12 border-bottom">
+                    <p><a style="text-decoration: none" href="{% url 'profile' post.author.profile.pk %}"
+                          class="text-primary">@{{ post.author|title }}</a> - <i>
+                        {{ post.created_on|date:"d M Y H:i" }}</i></p>
+                    <div class="position-relative">
+                        <p>{{ post.body|linebreaks }}</p>
+                        <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+                    </div>
                 </div>
             </div>
         {% endfor %}
