@@ -15,11 +15,12 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 
             </ul>
-            <form class="d-flex">
+            <form class="d-flex" method="get" action="{% url 'profile-search' %}">
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">@</span>
                     <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                           aria-describedby="basic-addon1">
+                           aria-describedby="basic-addon1" name="query" value="{{ request.GET.query }}">
+                    <button type="submit" class="btn btn-light btn-outline-danger"><i class="fas fa-search"></i></button>
                 </div>
             </form>
             <ul class="navbar-nav mb-2 mb-lg-0">
