@@ -24,9 +24,15 @@
         {% for post in posts %}
             <div class="row justify-content-center mt-3">
                 <div class="col-md-6 col-sm-12 border-bottom">
-                    <p><a style="text-decoration: none" href="{% url 'profile' post.author.profile.pk %}"
-                          class="text-primary">@{{ post.author|title }}</a> - <i>
-                        {{ post.created_on|date:"d M Y H:i" }}</i></p>
+                    <div class="post-text">
+                        <a href="{% url 'profile' post.author.profile.pk %}">
+                            <img src="{{ post.author.profile.picture.url }}" class="rounded-circle post-img" height="30"
+                                 width="30">
+                        </a>
+                        <p><a href="{% url 'profile' post.author.profile.pk %}"
+                              class="text-primary user-link">@{{ post.author|title }}</a> - <i>
+                            {{ post.created_on|date:"d M Y H:i" }}</i></p>
+                    </div>
                     <div class="position-relative">
                         <p>{{ post.body|linebreaks }}</p>
                         <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>

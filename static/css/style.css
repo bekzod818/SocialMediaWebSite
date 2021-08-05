@@ -1,0 +1,13 @@
+.user-link {
+    text-decoration: none;
+}
+.default-btn {
+    color: #333;
+}
+.post-text {
+    padding-top: 0.5rem;
+}
+.post-img {
+    float: left;
+    margin-right: 1rem;
+}

@@ -12,9 +12,15 @@
         </div>
         <div class="row justify-content-center mt-3">
             <div class="col-md-6 col-sm-12 border-bottom pb-3">
-                <h4>
-                    <strong>{{ post.author|title }}</strong> - <i>{{ post.created_on|date:"d M Y H:i" }}</i>
-                </h4>
+                <div class="post-text">
+                    <a href="{% url 'profile' post.author.profile.pk %}">
+                        <img src="{{ post.author.profile.picture.url }}" class="rounded-circle post-img" height="50"
+                             width="50">
+                    </a>
+                    <h3><a href="{% url 'profile' post.author.profile.pk %}"
+                           class="text-primary user-link"><strong>@{{ post.author|title }}</strong></a> - <i>
+                        {{ post.created_on|date:"d M Y H:i" }}</i></h3>
+                </div>
                 <p>{{ post.body|linebreaks }}</p>
                 <div class="d-flex flex-row my-2">
                     <form method="POST" action="{% url 'like' post.pk %}">
@@ -33,9 +39,9 @@
                     </form>
                 </div>
                 {% if request.user == post.author %}
-                    <a href="{% url 'post-edit' post.pk %}" class="btn btn-outline-success"><i
+                    <a href="{% url 'post-edit' post.pk %}" class="btn btn-success"><i
                             class="far fa-edit"></i> Edit Post</a>
-                    <a href="{% url 'post-delete' post.pk %}" class="btn btn-outline-danger"><i
+                    <a href="{% url 'post-delete' post.pk %}" class="btn btn-danger"><i
                             class="fas fa-trash-alt"></i> Delete Post</a>
                 {% endif %}
             </div>
@@ -60,7 +66,15 @@
     {% for comment in comments %}
         <div class="row justify-content-center mt-3 mb-5">
             <div class="col-md-5 col-sm-12 border-bottom pb-3">
-                <p><strong>{{ comment.author|title }}</strong> - <i>{{ comment.created_on|date:"d M Y H:i" }}</i></p>
+                <div class="post-text">
+                    <a href="{% url 'profile' comment.author.profile.pk %}">
+                        <img src="{{ comment.author.profile.picture.url }}" class="rounded-circle post-img" height="50"
+                             width="50">
+                    </a>
+                    <p><a href="{% url 'profile' comment.author.profile.pk %}"
+                           class="text-primary user-link"><strong>@{{ comment.author|title }}</strong></a> - <i>
+                        {{ comment.created_on|date:"d M Y H:i" }}</i></p>
+                </div>
                 <p>{{ comment.comment|linebreaks }}</p>
                 {% if request.user == comment.author %}
                     <a href="{% url 'comment-delete' post.pk comment.pk %}" class="btn btn-warning"><i
