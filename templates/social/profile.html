@@ -11,38 +11,29 @@
         </div>
 
         <div class='row justify-content-center mt-5'>
-            <div class="card shadow-sm col-md-8 col-sm-12 border-bottom px-5 pt-3">
-                <img src="{{ profile.picture.url }}" alt="" class="rounded-circle" width="120" height="120">
-                {% if profile.name %}
-                    <h3 class="py-4">{{ profile.name }}
-                        <span>
+            <div class="card shadow-sm col-md-8 col-sm-12 border border-dark border-bottom px-5 pt-3">
+                <div class="text-center">
+                    <img src="{{ profile.picture.url }}" alt="" class="rounded-circle" width="120" height="120">
+                    {% if profile.name %}
+                        <h3 class="">{{ profile.name }}
+                            <span>
                         {% if request.user == user %}
                             <a href="{% url 'profile-edit' profile.pk %}" class="default-btn"><i
                                     class="far fa-edit"></i></a>
                         {% endif %}
                     </span>
-                    </h3>
-                {% else %}
-                    <h3 class="py-4">{{ user.username }}
-                        <span>
+                        </h3>
+                    {% else %}
+                        <h3 class="">{{ user.username }}
+                            <span>
                         {% if request.user == user %}
                             <a href="{% url 'profile-edit' profile.pk %}" class="default-btn"><i
                                     class="far fa-edit"></i></a>
                         {% endif %}
                     </span>
-                    </h3>
-                {% endif %}
-                {% if profile.location %}
-                    <p>{{ profile.location }}</p>
-                {% endif %}
-                {% if profile.birth_date %}
-                    <p>{{ profile.birth_date }}</p>
-                {% endif %}
-                {% if profile.bio %}
-                    <p>{{ profile.bio }}</p>
-                {% endif %}
-                <div class="mb-3">
-                    <p>Followers: {{ number_of_followers }}</p>
+                        </h3>
+                    {% endif %}
+
                     {% if user == request.user %}
                     {% else %}
                         {% if is_following %}
@@ -57,6 +48,19 @@
                             </form>
                         {% endif %}
                     {% endif %}
+                </div>
+                {% if profile.bio %}
+                    <p><strong>About: </strong>{{ profile.bio }}</p>
+                {% endif %}
+                {% if profile.birth_date %}
+                    <p><strong>Birthday:</strong> {{ profile.birth_date }}</p>
+                {% endif %}
+                {% if profile.location %}
+                    <p><strong>Location: </strong><i>{{ profile.location }}</i></p>
+                {% endif %}
+                <div class="mb-3">
+                    <a href="{% url 'list-followers' profile.pk %}"
+                       class="user-link"><strong>Followers: {{ number_of_followers }}</strong></a>
                 </div>
             </div>
         </div>
