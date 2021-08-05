@@ -16,6 +16,22 @@
                     <strong>{{ post.author|title }}</strong> - <i>{{ post.created_on|date:"d M Y H:i" }}</i>
                 </h4>
                 <p>{{ post.body|linebreaks }}</p>
+                <div class="d-flex flex-row my-2">
+                    <form method="POST" action="{% url 'like' post.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button class="btn btn-outline-success mx-2" type="submit">
+                            <i class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span></i>
+                        </button>
+                    </form>
+                    <form method="POST" action="{% url 'dislike' post.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button class="btn btn-outline-danger" type="submit">
+                            <i class="far fa-thumbs-down"> <span>{{ post.dislikes.all.count }}</span></i>
+                        </button>
+                    </form>
+                </div>
                 {% if request.user == post.author %}
                     <a href="{% url 'post-edit' post.pk %}" class="btn btn-outline-success"><i
                             class="far fa-edit"></i> Edit Post</a>
