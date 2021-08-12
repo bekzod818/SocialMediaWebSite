@@ -1,0 +1,67 @@
+<div>
+    <a href="" class="btn btn-warning">
+        <b>Notifications: {{ notifications.count }}</b>
+    </a>
+    {% for notification in notifications %}
+        {% if notification.post %}
+            {% if notification.notification_type == 1 %}
+                <div class="toast my-3" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Like</strong>
+                        <small>{{ notification.date }}</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <a href="{% url 'post-notification' notification.pk notification.post.pk %}" style="text-decoration: none">@{{ notification.from_user }} liked your post</a>
+                    </div>
+                </div>
+            {% elif notification.notification_type == 2 %}
+                <div class="toast my-3" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Comment</strong>
+                        <small>{{ notification.date }}</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <a href="{% url 'post-notification' notification.pk notification.post.pk %}" style="text-decoration: none">@{{ notification.from_user }} commented on your post</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% elif notification.comment %}
+            {% if notification.notification_type == 1 %}
+                <div class="toast my-3" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Like</strong>
+                        <small>{{ notification.date }}</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <a href="{% url 'post-notification' notification.pk notification.comment.post.pk %}" style="text-decoration: none">@{{ notification.from_user }} like your comment</a>
+                    </div>
+                </div>
+            {% elif notification.notification_type == 2 %}
+                <div class="toast my-3" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Reply</strong>
+                        <small>{{ notification.date }}</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <a href="{% url 'post-notification' notification.pk notification.comment.post.pk %}" style="text-decoration: none">@{{ notification.from_user }} replied to your comment</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="toast my-3" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Follow</strong>
+                    <small>{{ notification.date }}</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <a href="{% url 'follow-notification' notification.pk notification.from_user.profile.pk %}" style="text-decoration: none">@{{ notification.from_user }} has started following you</a>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
