@@ -9,7 +9,7 @@
                     <div class="toast-header">
                         <strong class="me-auto">Like</strong>
                         <small>{{ notification.date }}</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="removeNotification(`{% url 'notification-delete' notification.pk %}`, `{{ request.path }}`)"></button>
                     </div>
                     <div class="toast-body">
                         <a href="{% url 'post-notification' notification.pk notification.post.pk %}" style="text-decoration: none">@{{ notification.from_user }} liked your post</a>
@@ -20,7 +20,7 @@
                     <div class="toast-header">
                         <strong class="me-auto">Comment</strong>
                         <small>{{ notification.date }}</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="removeNotification(`{% url 'notification-delete' notification.pk %}`, `{{ request.path }}`)"></button>
                     </div>
                     <div class="toast-body">
                         <a href="{% url 'post-notification' notification.pk notification.post.pk %}" style="text-decoration: none">@{{ notification.from_user }} commented on your post</a>
@@ -33,7 +33,7 @@
                     <div class="toast-header">
                         <strong class="me-auto">Like</strong>
                         <small>{{ notification.date }}</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="removeNotification(`{% url 'notification-delete' notification.pk %}`, `{{ request.path }}`)"></button>
                     </div>
                     <div class="toast-body">
                         <a href="{% url 'post-notification' notification.pk notification.comment.post.pk %}" style="text-decoration: none">@{{ notification.from_user }} like your comment</a>
@@ -44,7 +44,7 @@
                     <div class="toast-header">
                         <strong class="me-auto">Reply</strong>
                         <small>{{ notification.date }}</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="removeNotification(`{% url 'notification-delete' notification.pk %}`, `{{ request.path }}`)"></button>
                     </div>
                     <div class="toast-body">
                         <a href="{% url 'post-notification' notification.pk notification.comment.post.pk %}" style="text-decoration: none">@{{ notification.from_user }} replied to your comment</a>
@@ -56,7 +56,7 @@
                 <div class="toast-header">
                     <strong class="me-auto">Follow</strong>
                     <small>{{ notification.date }}</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="removeNotification(`{% url 'notification-delete' notification.pk %}`, `{{ request.path }}`)"></button>
                 </div>
                 <div class="toast-body">
                     <a href="{% url 'follow-notification' notification.pk notification.from_user.profile.pk %}" style="text-decoration: none">@{{ notification.from_user }} has started following you</a>
