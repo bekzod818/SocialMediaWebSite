@@ -23,6 +23,9 @@
                         {{ post.created_on|date:"d M Y H:i" }}</i></h3>
                 </div>
                 <p>{{ post.body|linebreaks }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="post-image">
+                {% endif %}
                 {% if request.user == post.author %}
                     <a href="{% url 'post-edit' post.pk %}" class="btn btn-success"><i
                             class="far fa-edit"></i> Edit Post</a>

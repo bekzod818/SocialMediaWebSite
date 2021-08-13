@@ -12,7 +12,7 @@
         </div>
         <div class="row justify-content-center mt-3">
             <div class="col-md-6 col-sm-12">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|crispy }}
                     <div class="d-grid gap-2">
@@ -34,6 +34,9 @@
                             {{ post.created_on|date:"d M Y H:i" }}</i></p>
                     </div>
                     <div class="position-relative">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="post-image">
+                        {% endif %}
                         <p>{{ post.body|linebreaks }}</p>
                         <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
                     </div>
