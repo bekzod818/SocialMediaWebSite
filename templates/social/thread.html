@@ -1,0 +1,59 @@
+{% extends 'landing/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Thread Page
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row ">
+            <div class="card border border-dark col-md-12 mt-5 p-3 shadow-sm">
+                {% if thread.receiver == request.user %}
+                    <h5>@{{ thread.user }}</h5>
+                {% else %}
+                    <h5>@{{ thread.receiver }}</h5>
+                {% endif %}
+            </div>
+        </div>
+        {% if message_list.all.count == 0 %}
+        <div class="row my-5">
+            <div class="col-md-12">
+                <p class="empty-text">
+                    No Messages
+                </p>
+            </div>
+        </div>
+        {% endif %}
+
+        {% for message in message_list %}
+        <div class="row">
+            <div class="col-md-12 my-1">
+                {% if message.sender_user == request.user %}
+                    <div class="sent-message my-2">
+                        <p>{{ message.body }}</p>
+                    </div>
+                {% elif message.receiver_user == request.user %}
+                    <div class="receiver-message my-2">
+                        <p>{{ message.body }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="row border border-dark">
+            <div class="card col-md-12 p-3 shadow-sm">
+                <form action="{% url 'create-message' thread.pk %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="d-grid gap-2 mt-3">
+                        <button type="submit" class="btn btn-success">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

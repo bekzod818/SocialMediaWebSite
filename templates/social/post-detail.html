@@ -22,10 +22,11 @@
                            class="text-primary user-link"><strong>@{{ post.author|title }}</strong></a> - <i>
                         {{ post.created_on|date:"d M Y H:i" }}</i></h3>
                 </div>
-                <p>{{ post.body|linebreaks }}</p>
+                <br>
                 {% if post.image %}
                     <img src="{{ post.image.url }}" class="post-image">
                 {% endif %}
+                <p>{{ post.body|linebreaks }}</p>
                 {% if request.user == post.author %}
                     <a href="{% url 'post-edit' post.pk %}" class="btn btn-success"><i
                             class="far fa-edit"></i> Edit Post</a>
@@ -138,8 +139,8 @@
                                     {{ child_comment.created_on|date:"d M Y H:i" }}</i></p>
                             <p>{{ child_comment.comment|linebreaks }}</p>
                             {% if request.user == child_comment.author %}
-                            <a href="{% url 'comment-delete' post.pk child_comment.pk %}" class="btn btn-warning"><i
-                                    class="fas fa-trash-alt"></i> Reply Comment</a>
+                                <a href="{% url 'comment-delete' post.pk child_comment.pk %}" class="btn btn-warning"><i
+                                        class="fas fa-trash-alt"></i> Reply Comment</a>
                             {% endif %}
                         </div>
                     </div>

@@ -22,3 +22,24 @@
     margin-bottom: 10px;
 }
 
+.empty-text {
+    color: #777;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.sent-message {
+    background-color: #d6cdcd;
+    border-radius: 30px;
+    padding: 10px 25px;
+    width: 25%;
+    float: right;
+}
+
+.receiver-message {
+    background-color: rgb(8, 92, 200);
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 25px;
+    width: 25%;
+}

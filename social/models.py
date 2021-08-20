@@ -92,3 +92,21 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"{self.from_user} - {self.to_user} -> {self.notification_type}"
+
+
+class ThreadModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+
+    def __str__(self):
+        return f"@{self.user} - @{self.receiver}"
+
+
+class MessageModel(models.Model):
+    thread = models.ForeignKey(ThreadModel, on_delete=models.CASCADE, related_name="+", null=True, blank=True)
+    sender_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    receiver_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    body = models.CharField(max_length=1000)
+    image = models.ImageField(upload_to="message_photos/%Y/%m/%d/", blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)

@@ -63,9 +63,11 @@
                     <a href="{% url 'list-followers' profile.pk %}"
                        class="user-link"><strong>Followers: {{ number_of_followers }}</strong></a>
                 </div>
-                <div class="mb-3">
-                    {% show_notifications %}
-                </div>
+                {% if profile.user == request.user %}
+                    <div class="mb-3">
+                        {% show_notifications %}
+                    </div>
+                {% endif %}
             </div>
         </div>
 
