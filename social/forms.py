@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, MessageModel
 
 
 class PostForm(forms.ModelForm):
@@ -30,5 +30,13 @@ class ThreadForm(forms.Form):
     username = forms.CharField(label='', max_length=100)
 
 
-class MessageForm(forms.Form):
-    message = forms.CharField(label='', max_length=1000)
+class MessageForm(forms.ModelForm):
+    body = forms.CharField(label='', widget=forms.Textarea(attrs={
+        'rows': 4,
+        'placeholder': 'Write your message ...'
+    }))
+    image = forms.ImageField(required=False)
+
+    class Meta:
+        model = MessageModel
+        fields = ['body', 'image']

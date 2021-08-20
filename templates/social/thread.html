@@ -30,16 +30,31 @@
         {% for message in message_list %}
         <div class="row">
             <div class="col-md-12 my-1">
-                {% if message.sender_user == request.user %}
+                {% if message.sender_user == request.user %}   
+                    {% if message.image %}
+                        <div>
+                            <img src="{{ message.image.url }}" class="message-image-1">
+                        </div>
+                    {% endif %}
+                    <div style="clear:both;"></div>
                     <div class="sent-message my-2">
                         <p>{{ message.body }}</p>
                     </div>
+                </div>
+            </div>
+            
+            <div class="col-md-12 my-1">
                 {% elif message.receiver_user == request.user %}
-                    <div class="receiver-message my-2">
-                        <p>{{ message.body }}</p>
+                {% if message.image %}
+                    <div>
+                        <img src="{{ message.image.url }}" class="message-image-2">
                     </div>
                 {% endif %}
+                <div class="receiver-message my-2">
+                    <p>{{ message.body }}</p>
+                </div>
             </div>
+                {% endif %}
         </div>
         {% endfor %}
 

@@ -81,12 +81,13 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Notification(models.Model):
-    # 1 = Like, 2 = Comment, 3 = Follow
+    # 1 = Like, 2 = Comment, 3 = Follow, 4 = DM
     notification_type = models.IntegerField()
     to_user = models.ForeignKey(User, related_name='notification_to', on_delete=models.CASCADE, null=True)
     from_user = models.ForeignKey(User, related_name='notification_from', on_delete=models.CASCADE, null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="+", null=True, blank=True)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="+", null=True, blank=True)
+    thread = models.ForeignKey('ThreadModel', on_delete=models.CASCADE, related_name="+", null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     user_has_seen = models.BooleanField(default=False)
 

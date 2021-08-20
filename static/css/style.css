@@ -32,7 +32,7 @@
     background-color: #d6cdcd;
     border-radius: 30px;
     padding: 10px 25px;
-    width: 25%;
+    width: 30%;
     float: right;
 }
 
@@ -41,5 +41,23 @@
     color: #fff;
     border-radius: 30px;
     padding: 10px 25px;
-    width: 25%;
+    width: 30%;
+}
+
+.message-image-1 {
+	border-radius: 20px;
+	max-width: 35%;
+	height: auto;
+    float: right;
+}
+
+.message-image-2 {
+	border-radius: 20px;
+	max-width: 35%;
+	height: auto;
+}
+
+
+.inbox-icon {
+	margin-right: 5px;
 }
